@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "amadeus": "^5.5.0",
     "axios": "^0.19.2",
     "body-parser": "^1.17.0",
     "express": "^4.15.0",
