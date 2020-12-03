@@ -1,0 +1,43 @@
+{
+  "name": "flight-service",
+  "version": "1.0.0",
+  "description": "Flight service for friendTrips",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "axios": "^0.19.2",
+    "body-parser": "^1.17.0",
+    "express": "^4.15.0",
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.6",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "webpack -d --mode development --watch",
+    "start": "webpack-dev-server --open --mode development",
+    "server-dev": "nodemon server/index.js",
+    "build": "webpack --mode production",
+    "eslinter": "eslint '**/*.js' --ignore-pattern node_modules/"
+  },
+  "author": "Alex",
+  "license": "ISC"
+}
