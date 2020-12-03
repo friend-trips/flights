@@ -16,12 +16,14 @@ class Form extends React.Component {
       arrive: '',
       class: 'ECONOMY',
       adults: '1',
-      nonstop: false
+      nonstop: false,
+      flights: []
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.filterData = this.filterData.bind(this);
   }
 
   handleChange(event) {
@@ -36,8 +38,34 @@ class Form extends React.Component {
     })
   }
 
+  filterData(array) {
+    return array.map(result => {
+      let filteredResult = {
+        id: result.id,
+        bookableSeats: result.numberOfBookableSeats,
+        totalPrice: result.price.grandTotal,
+        outgoingDuration: result.itineraries[0].segments[0].duration,
+        arrivalAirport: result.itineraries[0].segments[0].arrival.iataCode,
+        arrivalTime: result.itineraries[0].segments[0].arrival.at.slice(11),
+        arrivalDate: result.itineraries[0].segments[0].arrival.at.slice(0, 10),
+        departureAirport: result.itineraries[0].segments[0].departure.iataCode,
+        departureTime: result.itineraries[0].segments[0].departure.at.slice(11),
+        departureDate: result.itineraries[0].segments[0].departure.at.slice(0, 10),
+        outgoingFlightNumber: result.itineraries[0].segments[0].number,
+        numberOfStops: result.itineraries[0].segments[0].numberOfStops,
+        carrierCode: result.itineraries[0].segments[0].carrierCode,
+        operatingCarrierCode: carrierCode: result.itineraries[0].segments[0].operating.carrierCode,
+
+      };
+      return filteredResult;
+    })
+  }
+
   handleSubmit(event) {
     event.preventDefault();
+
+    const displaySearchFeed = this.props.displaySearchFeed;
+    const filterData = this.filterData;
 
     amadeus.shopping.flightOffersSearch.get({
       originLocationCode: this.state.from,
@@ -52,6 +80,7 @@ class Form extends React.Component {
     })
     .then(function (response) {
       console.log(response.data);
+      displaySearchFeed(filterData(response.data));
     })
     .catch(function (response) {
       console.error(response);
