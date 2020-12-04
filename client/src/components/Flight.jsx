@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   border: solid 2px;
+  margin-bottom: 20px;
 `;
 const Header = styled.header`
   display: flex;
@@ -21,15 +22,19 @@ const Airport = styled.span``;
 const CarrierCode = styled.span``;
 const Class = styled.span``;
 
-const Flights = ({data}) => {
+const Flights = ({ data }) => {
   return (
     <Container>
       <Header>
         <Direction>Departing</Direction>
         <Date>{data.outgoingDepartureDate}</Date>
-        <Time>{data.outgoingDepartureTime} - {data.outgoingArrivalTime}</Time>
+        <Time>
+          {data.outgoingDepartureTime} - {data.outgoingArrivalTime}
+        </Time>
         <Duration>{data.outgoingDuration}</Duration>
-        <Airport>{data.outgoingDepartureAirport} - {data.outgoingArrivalAirport}</Airport>
+        <Airport>
+          {data.outgoingDepartureAirport} - {data.outgoingArrivalAirport}
+        </Airport>
         <FlightNumber>{data.outgoingFlightNumber}</FlightNumber>
         <CarrierCode>{data.outgoingCarrierCode}</CarrierCode>
         <Class>{data.outgoingClass}</Class>
@@ -37,9 +42,13 @@ const Flights = ({data}) => {
       <Header>
         <Direction>Returning</Direction>
         <Date>{data.returnDepartureDate}</Date>
-        <Time>{data.returnDepartureTime} - {data.returnArrivalTime}</Time>
+        <Time>
+          {data.returnDepartureTime} - {data.returnArrivalTime}
+        </Time>
         <Duration>{data.returnDuration}</Duration>
-        <Airport>{data.returnDepartureAirport} - {data.returnArrivalAirport}</Airport>
+        <Airport>
+          {data.returnDepartureAirport} - {data.returnArrivalAirport}
+        </Airport>
         <FlightNumber>{data.returnFlightNumber}</FlightNumber>
         <CarrierCode>{data.returnCarrierCode}</CarrierCode>
         <Class>{data.returnClass}</Class>
@@ -49,4 +58,3 @@ const Flights = ({data}) => {
 };
 
 export default Flights;
-
