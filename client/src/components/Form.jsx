@@ -1,4 +1,5 @@
 import React from 'react';
+
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
   clientId: 'GvdXBCW4a83r4vyr5i5ngrgxUX9XmTYG',

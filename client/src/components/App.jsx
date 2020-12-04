@@ -1,5 +1,6 @@
 import React from "react";
 import Form from './Form.jsx';
+import SearchResults from './SearchResults.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,7 +21,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <Form displaySearchFeed={this.displaySearchFeed}/>
+      <div>
+        <Form displaySearchFeed={this.displaySearchFeed}/>
+        {this.state.searchResults.length > 0 ? <SearchResults searchResults={this.state.searchResults}/> : null}
+      </div>
     )
   }
 }
