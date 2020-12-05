@@ -2,13 +2,14 @@ import React, { Component, useState} from "react";
 import { DateRangeInput } from "@datepicker-react/styled";
 import styled, { ThemeProvider } from "styled-components";
 import moment from 'moment';
+import keys from '../../../config.js';
 
 // import styles from './App.css';
 
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
-  clientId: 'fVXmfiyi0x08BRIRjPPigsfUZsTG7kf3',
-  clientSecret: 'oMQaNklAzUaCswoo'
+  clientId: keys.clientId,
+  clientSecret: keys.clientSecret
 });
 
 const Container = styled.div`
@@ -70,8 +71,10 @@ function FlightForm({displaySearchFeed}) {
       if (timeString.slice(0, 2) > 12) {
         let twelveHour = timeString.slice(0, 2) % 12;
         return twelveHour.toString().concat(timeString.slice(2)).concat(' PM');
-      } else {
+      } else if (timeString[0] === '0') {
         return timeString.slice(1).concat(' AM');
+      } else {
+        return timeString.concat(' AM');
       }
     }
 
@@ -141,7 +144,6 @@ function FlightForm({displaySearchFeed}) {
     .then(function (response) {
       console.log("response", response);
       flightDictionary = response.result.dictionaries.carriers;
-      console.log('flightDictionary', flightDictionary);
       displaySearchFeed(filterData(response.data));
     })
     .catch(function (response) {
