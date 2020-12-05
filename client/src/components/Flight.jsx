@@ -66,45 +66,99 @@ import styled from "styled-components";
 
 // this is the container for the div experiment
 const Container = styled.div`
-  display: block;
-  border: solid 2px;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 50% 50%;
+  border: solid 1px;
+  border-radius: 7px;
   margin-bottom: 20px;
   height: 150px;
-  width: 100%;
+  width: 97%;
   padding: 10px;
 `;
 const Direction = styled.h1``;
 const FlightNumber = styled.span``;
 const Date = styled.span`
+  font-family: "cerapro-bold",sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding-bottom: 6px;
 `;
-const Duration = styled.span``;
-const Time = styled.span``;
-const Airport = styled.span``;
-const CarrierCode = styled.span``;
+const Duration = styled.span`
+  font-family: "cerapro-bold",sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding-bottom: 6px;
+`;
+const Time = styled.span`
+  font-family: "cerapro-bold",sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+`;
+const Airport = styled.span`
+  font-family: "cerapro-regular",sans-serif;
+  font-weight: 170;
+  font-size: 14px;
+  line-height: 20px;
+  color: #919191;
+`;
+const CarrierCode = styled.span`
+  font-family: "cerapro-regular",sans-serif;
+  font-weight: 170;
+  font-size: 14px;
+  line-height: 20px;
+  color: #919191;
+`;
 const Class = styled.span``;
 const Departing = styled.div`
-  display: block;
-  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 0px 10px 10px;
+  grid-row-end: 2;
   width: 100%;
   height: 50%;
+  align-self: center;
 `;
 const Returning = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 0px 10px 10px;
+  grid-row-start: 2;
   width: 100%;
   height: 50%;
+  align-self: center;
 `;
 const DateAndCarrier = styled.div`
   height: 100%;
   width: 30%;
   float: left;
   display: grid;
-  grid-template-rows: 50% 50%;
 `;
 const DurationAndAirports = styled.div`
   height: 100%;
   width: 30%;
   float: right;
   display: grid;
-  grid-template-rows: 50% 50%;
+  text-align: right;
+`;
+const Price = styled.div`
+  height: 100%;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  font-family: "cerapro-bold",sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+`;
+const Amount = styled.span`
+  vertical-align: middle;
+  display: inline-block;
 `;
 
 const Flights = ({ data }) => {
@@ -140,6 +194,7 @@ const Flights = ({ data }) => {
           </Airport>
         </DurationAndAirports>
       </Returning>
+      <Price><Amount>${data.totalPrice}</Amount></Price>
     </Container>
 
 

@@ -7,6 +7,9 @@ const ResultsContainer = styled.div`
   height: 100%;
   overflow-y: scroll;
   width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const SearchResults = (props) => {

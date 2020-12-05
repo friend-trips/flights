@@ -70,11 +70,11 @@ function FlightForm({displaySearchFeed}) {
     function changeTime(timeString) {
       if (timeString.slice(0, 2) > 12) {
         let twelveHour = timeString.slice(0, 2) % 12;
-        return twelveHour.toString().concat(timeString.slice(2)).concat(' PM');
+        return twelveHour.toString().concat(timeString.slice(2)).concat(' pm');
       } else if (timeString[0] === '0') {
-        return timeString.slice(1).concat(' AM');
+        return timeString.slice(1).concat(' am');
       } else {
-        return timeString.concat(' AM');
+        return timeString.concat(' am');
       }
     }
 
@@ -85,14 +85,14 @@ function FlightForm({displaySearchFeed}) {
         if (MDYArr[0] === "0") MDYArr.shift();
         return MDYArr.join("")
       });
-      return dateArr.join("-");
+      return dateArr.join("/");
     }
 
     return array.map(result => {
       let filteredResult = {
         id: result.id,
         bookableSeats: result.numberOfBookableSeats,
-        totalPrice: result.price.grandTotal,
+        totalPrice: Math.floor(result.price.grandTotal),
 
         outgoingDuration: `${result.itineraries[0].segments[0].duration.slice(2, 5).toLowerCase()} ${result.itineraries[0].segments[0].duration.slice(5).toLowerCase()}`,
         outgoingArrivalAirport: result.itineraries[0].segments[0].arrival.iataCode,
@@ -130,10 +130,10 @@ function FlightForm({displaySearchFeed}) {
     let endingDate = moment(endDate).format("YYYY-MM-DD")
 
     amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: from,
-      destinationLocationCode: to,
-      departureDate: startingDate,
-      returnDate: endingDate,
+      originLocationCode: 'SFO',
+      destinationLocationCode: 'LON',
+      departureDate: '2021-02-01',
+      returnDate: '2021-02-07',
       adults: adults,
       travelClass: seatClass,
       nonStop: nonstop,
@@ -142,7 +142,7 @@ function FlightForm({displaySearchFeed}) {
       max: 25
     })
     .then(function (response) {
-      console.log("response", response);
+      console.log("response", response.data);
       flightDictionary = response.result.dictionaries.carriers;
       displaySearchFeed(filterData(response.data));
     })
