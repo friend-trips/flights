@@ -4,10 +4,19 @@ import SearchResults from "./SearchResults.jsx";
 import Suggestions from "./Suggestions.jsx";
 import styled from "styled-components";
 
+//entire screen
+const Container = styled.div`
+  position: absolute;
+  height: 99%;
+  padding: .5%;
+`
 const Content = styled.div`
   border: solid 3px;
   display: flex;
+  height: 89%;
 `;
+//^^ height will control size of the bottom section
+// form height and content should add up to equal 1--%
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +37,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <FlightForm displaySearchFeed={this.displaySearchFeed} />
         <Content>
           {this.state.searchResults.length > 0 ? (
@@ -36,7 +45,7 @@ class App extends React.Component {
           ) : null}
           <Suggestions />
         </Content>
-      </div>
+      </Container>
     );
   }
 }

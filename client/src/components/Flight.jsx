@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 25% 25% 25% 25%;
   border: solid 2px;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
+  height: 200px;
 `;
 const Header = styled.header`
   display: flex;
@@ -15,7 +16,9 @@ const Header = styled.header`
 `;
 const Direction = styled.h1``;
 const FlightNumber = styled.span``;
-const Date = styled.span``;
+const Date = styled.span`
+  grid-row: first-line / 2;
+`;
 const Duration = styled.span``;
 const Time = styled.span``;
 const Airport = styled.span``;
@@ -26,7 +29,7 @@ const Flights = ({ data }) => {
   return (
     <Container>
       <Header>
-        <Direction>Departing</Direction>
+        {/* <Direction>Departing</Direction> */}
         <Date>{data.outgoingDepartureDate}</Date>
         <Time>
           {data.outgoingDepartureTime} - {data.outgoingArrivalTime}
@@ -40,7 +43,7 @@ const Flights = ({ data }) => {
         <Class>{data.outgoingClass}</Class>
       </Header>
       <Header>
-        <Direction>Returning</Direction>
+        {/* <Direction>Returning</Direction> */}
         <Date>{data.returnDepartureDate}</Date>
         <Time>
           {data.returnDepartureTime} - {data.returnArrivalTime}
