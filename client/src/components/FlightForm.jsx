@@ -15,13 +15,17 @@ var amadeus = new Amadeus({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 5%;
-  height: 5%;
+  height: 15%;
   border-style: solid;
   border-width: 3px;
   border-color: red;
   margin-bottom: 5%;
   margin-top: 2%;
+`;
+
+const StyledTopRow = styled.div`
+  display: flex;
+  margin-left: 33em;
 `;
 
 const StyledInput = styled.input`
@@ -39,12 +43,14 @@ const StyledSubmit = styled.input`
   border: none;
   background-color: #f7498e;
   color: #fff;
-  height: 40px;
-  width: auto;
+  height: 44px;
+  width: 75px;
   border-radius: 5px;
   font-family: "cerapro-bold", sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
+  margin-left: 1em;
+  margin-top: 0.05em;
 `;
 
 const Form = styled.form`
@@ -213,40 +219,7 @@ function FlightForm({ displaySearchFeed }) {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
-        <label>
-          <StyledInput
-            type="text"
-            placeholder="From"
-            name="from"
-            value={from}
-            onChange={(e) => {
-              handleChange("from", e);
-            }}
-          />
-        </label>
-        <label>
-          <StyledInput
-            type="text"
-            placeholder="To"
-            name="to"
-            value={to}
-            onChange={(e) => {
-              handleChange("to", e);
-            }}
-          />
-        </label>
-        <DateRangeInput
-          className="datePicker"
-          onDatesChange={(data) => {
-            setDates(data);
-          }}
-          onFocusChange={(focusedInput) => setFocusedCalendar(focusedInput)}
-          startDate={startDate} // Date or null
-          endDate={endDate} // Date or null
-          focusedInput={focusedCalendar} // START_DATE, END_DATE or null
-          style="border-width: 100px;"
-        />
+      <StyledTopRow>
         <label>
           <select
             value={seatClass}
@@ -287,6 +260,42 @@ function FlightForm({ displaySearchFeed }) {
           }}
           defaultChecked={nonstop}
         />
+      </StyledTopRow>
+      <Form onSubmit={handleSubmit}>
+        <label>
+          <StyledInput
+            type="text"
+            placeholder="From"
+            name="from"
+            value={from}
+            onChange={(e) => {
+              handleChange("from", e);
+            }}
+          />
+        </label>
+        <label>
+          <StyledInput
+            type="text"
+            placeholder="To"
+            name="to"
+            value={to}
+            onChange={(e) => {
+              handleChange("to", e);
+            }}
+          />
+        </label>
+        <DateRangeInput
+          className="datePicker"
+          onDatesChange={(data) => {
+            setDates(data);
+          }}
+          onFocusChange={(focusedInput) => setFocusedCalendar(focusedInput)}
+          startDate={startDate} // Date or null
+          endDate={endDate} // Date or null
+          focusedInput={focusedCalendar} // START_DATE, END_DATE or null
+          style="border-width: 100px;"
+        />
+
         <StyledSubmit className="hi" type="submit" value="Search" />
       </Form>
     </Container>
