@@ -15,7 +15,7 @@ var amadeus = new Amadeus({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 15%;
+  height: 8%;
   border-style: solid;
   border-width: 3px;
   border-color: red;
@@ -26,6 +26,69 @@ const Container = styled.div`
 const StyledTopRow = styled.div`
   display: flex;
   margin-left: 33em;
+  margin-top: 0.5em;
+  margin-bottom: 0.4em;
+`;
+//  -webkit-appearance: none;
+
+const StyledLabelClass = styled.label`
+  font-weight: 500;
+`;
+
+const StyledSelectClass = styled.select`
+  border-radius: 13px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  border-color: #fc5c65;
+  border-width: 3px;
+  background-color: #ffc8c4;
+  color: #c8170a;
+  text-align-last: center;
+  margin-right: 3px;
+`;
+//  color: #c8170a;
+
+const StyledLabelAdults = styled.label`
+  border-radius: 13px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  background-color: #fff9c5;
+  color: #d6c313;
+
+  text-align-last: center;
+  width: 100px;
+  display: inline-block;
+  border: 3px solid #fdce54;
+  margin-right: 3px;
+`;
+
+const StyledSelectAdults = styled.select`
+  background-color: transparent;
+  border: 0;
+  color: #d6c313;
+  text-align-last: right;
+`;
+
+const StyledLabelNonstop = styled.label`
+  border-radius: 13px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  background-color: #c6ffaf;
+  color: #3ed602;
+  text-align-last: center;
+  width: 80px;
+  margin-top: 0px;
+  border: 3px solid #3ed602;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 `;
 
 const StyledInput = styled.input`
@@ -220,8 +283,8 @@ function FlightForm({ displaySearchFeed }) {
   return (
     <Container>
       <StyledTopRow>
-        <label>
-          <select
+        <StyledLabelClass>
+          <StyledSelectClass
             value={seatClass}
             name="seatClass"
             onChange={(e) => {
@@ -232,11 +295,11 @@ function FlightForm({ displaySearchFeed }) {
             <option value="PREMIUM_ECONOMY">Premium Economy</option>
             <option value="BUSINESS">Business</option>
             <option value="FIRST">First</option>
-          </select>
-        </label>
-        <label>
+          </StyledSelectClass>
+        </StyledLabelClass>
+        <StyledLabelAdults>
           Adults
-          <select
+          <StyledSelectAdults
             type="number"
             value={adults}
             name="adults"
@@ -248,18 +311,20 @@ function FlightForm({ displaySearchFeed }) {
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
-          </select>
-        </label>
-        <label>Nonstop</label>
-        <input
-          type="checkbox"
-          id="Nonstop"
-          name="Nonstop"
-          onChange={(e) => {
-            handleChange("nonstop", e);
-          }}
-          defaultChecked={nonstop}
-        />
+          </StyledSelectAdults>
+        </StyledLabelAdults>
+        <StyledLabelNonstop>
+          Nonstop
+          <input
+            type="checkbox"
+            id="Nonstop"
+            name="Nonstop"
+            onChange={(e) => {
+              handleChange("nonstop", e);
+            }}
+            defaultChecked={nonstop}
+          />
+        </StyledLabelNonstop>
       </StyledTopRow>
       <Form onSubmit={handleSubmit}>
         <label>

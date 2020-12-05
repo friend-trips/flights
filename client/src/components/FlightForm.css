@@ -1,7 +1,3 @@
-/* input {
-  background-color: red;
-} */
-
 /* .react-datepicker-wrapper,
 .react-datepicker__input-container,
 .react-datepicker__input-container input {
@@ -30,14 +26,11 @@ label[for="endDate"] {
 }
 
 ::placeholder {
-  /* Most modern browsers support this now. */
-  /* color: #a9a9a9; */
   color: #999999;
 }
 
-/* .sc-jSgupP__eoibNB {
-  font-size: 100px;
-} */
-/* class="sc-jSgupP eoibNB" .datePicker {
+input[type="checkbox"] {
   background-color: red;
-} */
+  border-left-color: #06f;
+  border-right-color: #06f;
+}
