@@ -8,8 +8,9 @@ import styled from "styled-components";
 const Container = styled.div`
   position: absolute;
   height: 99%;
-  padding: .5%;
-`
+  width: 99%;
+  padding: 0%;
+`;
 const Content = styled.div`
   border: solid 3px;
   display: flex;
