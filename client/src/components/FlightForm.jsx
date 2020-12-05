@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import { DateRangeInput } from "@datepicker-react/styled";
 import styled, { ThemeProvider } from "styled-components";
+import "./FlightForm.css";
 import moment from "moment";
 
 // import styles from './App.css';
@@ -26,6 +27,8 @@ const Container = styled.div`
 const StyledInput = styled.input`
   height: 43px;
   font-family: Montserrat, sans-serif;
+  border-radius: 5px;
+  font-weight: 500;
 `;
 
 const StyledSubmit = styled.input`
@@ -35,7 +38,7 @@ const StyledSubmit = styled.input`
   color: #fff;
   height: 40px;
   width: auto;
-  border-radius: 6px;
+  border-radius: 5px;
   font-family: "cerapro-bold", sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
@@ -230,37 +233,8 @@ function FlightForm({ displaySearchFeed }) {
             }}
           />
         </label>
-        {/* <ThemeProvider
-          theme={{
-            breakpoints: ["32em", "48em", "64em"],
-            reactDatepicker: {
-              daySize: [36, 40],
-              fontFamily: "system-ui, -apple-system",
-              colors: {
-                accessibility: "#D80249",
-                selectedDay: "#f7518b",
-                selectedDayHover: "#F75D95",
-                primaryColor: "#d8366f",
-              },
-            },
-          }}
-        > */}
-        {/* <ThemeProvider
-          theme={{
-            breakpoints: ["32em", "48em", "64em"],
-            reactDatepicker: {
-              daySize: [36, 40],
-              fontFamily: "system-ui, -apple-system",
-              colors: {
-                accessibility: "#D80249",
-                selectedDay: "#f7518b",
-                selectedDayHover: "#F75D95",
-                primaryColor: "red",
-              },
-            },
-          }}
-        > */}
         <DateRangeInput
+          className="datePicker"
           onDatesChange={(data) => {
             setDates(data);
           }}
@@ -268,8 +242,8 @@ function FlightForm({ displaySearchFeed }) {
           startDate={startDate} // Date or null
           endDate={endDate} // Date or null
           focusedInput={focusedCalendar} // START_DATE, END_DATE or null
+          style="border-width: 100px;"
         />
-        {/* </ThemeProvider> */}
         <label>
           <select
             value={seatClass}
@@ -310,7 +284,7 @@ function FlightForm({ displaySearchFeed }) {
           }}
           defaultChecked={nonstop}
         />
-        <StyledSubmit type="submit" value="Search" />
+        <StyledSubmit className="hi" type="submit" value="Search" />
       </Form>
     </Container>
   );

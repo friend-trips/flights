@@ -1,0 +1,43 @@
+/* input {
+  background-color: red;
+} */
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+  font-size: 100px;
+}
+
+#startDate {
+  border-radius: 5px;
+  font-family: Montserrat, sans-serif;
+  color: #a9a9a9;
+  font-weight: 500;
+}
+label[for="startDate"] {
+  border-radius: 5px;
+}
+
+label[for="endDate"] {
+  border-radius: 5px;
+}
+
+#endDate {
+  border-radius: 5px;
+  font-family: Montserrat, sans-serif;
+  color: #a9a9a9;
+  font-weight: 500;
+}
+
+::placeholder {
+  /* Most modern browsers support this now. */
+  /* color: #a9a9a9; */
+  color: #999999;
+}
+
+/* .sc-jSgupP__eoibNB {
+  font-size: 100px;
+} */
+/* class="sc-jSgupP eoibNB" .datePicker {
+  background-color: red;
+} */
