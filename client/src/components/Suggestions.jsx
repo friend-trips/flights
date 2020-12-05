@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const SuggestionsContainer = styled.div`
   border: solid 1px;
+  width: 33%;
 `;
 
 const Suggestions = (props) => {

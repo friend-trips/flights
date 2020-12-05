@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const ResultsContainer = styled.div`
   padding: 5px;
-  height: 100%;
+  height: 99%;
   overflow-y: scroll;
   width: 66%;
   display: flex;
