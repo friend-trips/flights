@@ -7,8 +7,8 @@ import moment from 'moment';
 
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
-  clientId: 'GvdXBCW4a83r4vyr5i5ngrgxUX9XmTYG',
-  clientSecret: 'AtQCe6Bqh1OQOK5O'
+  clientId: 'fVXmfiyi0x08BRIRjPPigsfUZsTG7kf3',
+  clientSecret: 'oMQaNklAzUaCswoo'
 });
 
 const Container = styled.div`
@@ -38,8 +38,8 @@ function FlightForm({displaySearchFeed}) {
   // const [test, setTest] = useState(false);
 
   const setDates = (data) => {
-    setStartDate(moment(data.startDate).format("YYYY-MM-DD"));
-    setEndDate(moment(data.endDate).format("YYYY-MM-DD"))
+    setStartDate(data.startDate);
+    setEndDate(data.endDate)
   }
   const handleChange = (field, event) => {
     console.log('handlechange', field);
@@ -123,12 +123,14 @@ function FlightForm({displaySearchFeed}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let startingDate = moment(startDate).format("YYYY-MM-DD")
+    let endingDate = moment(endDate).format("YYYY-MM-DD")
 
     amadeus.shopping.flightOffersSearch.get({
       originLocationCode: from,
       destinationLocationCode: to,
-      departureDate: '2021-02-01',
-      returnDate: '2021-02-07',
+      departureDate: startingDate,
+      returnDate: endingDate,
       adults: adults,
       travelClass: seatClass,
       nonStop: nonstop,
@@ -137,7 +139,7 @@ function FlightForm({displaySearchFeed}) {
       max: 25
     })
     .then(function (response) {
-      console.log(response);
+      console.log("response", response);
       flightDictionary = response.result.dictionaries.carriers;
       console.log('flightDictionary', flightDictionary);
       displaySearchFeed(filterData(response.data));
