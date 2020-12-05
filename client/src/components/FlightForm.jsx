@@ -25,10 +25,13 @@ const Container = styled.div`
 `;
 
 const StyledInput = styled.input`
-  height: 43px;
+  height: 44px;
   font-family: Montserrat, sans-serif;
   border-radius: 5px;
   font-weight: 500;
+  border-color: #bababa;
+  border-width: 1px;
+  margin-right: 4px;
 `;
 
 const StyledSubmit = styled.input`
