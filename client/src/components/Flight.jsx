@@ -1,68 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-// this is the css for the grid code on bottom
-// const Container = styled.div`
-//   display: grid;
-//   grid-template-rows: 25% 25% 25% 25%;
-//   grid-template-columns: 33% 33% 33%;
-//   border: solid 2px;
-//   margin-bottom: 20px;
-//   height: 150px;
-//   width: 600px;
-//   padding: 10px;
-// `;
-// const DepartingUpper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-around;
-//   grid-row-start: 1;
-//   grid-column-start: 1;
-//   grid-column-end: 4;
-// `;
-// const DepartingLower = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   grid-row-start: 2;
-//   grid-column-start: 1;
-//   grid-column-end: 4;
-// `;
-// const ReturningUpper = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   grid-row-start: 3;
-//   grid-column-start: 1;
-//   grid-column-end: 4;
-// `;
-// const ReturningLower = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   grid-row-start: 4;
-//   grid-column-start: 1;
-//   grid-column-end: 4;
-// `;
-// const Direction = styled.h1``;
-// const FlightNumber = styled.span``;
-// const Date = styled.span`
-// `;
-// const Duration = styled.span``;
-// const Time = styled.span``;
-// const Airport = styled.span``;
-// const CarrierCode = styled.span``;
-// const Class = styled.span``;
-// const Departing = styled.div`
-//   padding-bottom: 10px;
-//   width: 100%;
-//   height: 50%;
-// `;
-
+import axios from 'axios';
 
 // this is the container for the div experiment
 const Container = styled.div`
@@ -158,6 +96,7 @@ const Price = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
+  z-index: -1;
 `;
 const Amount = styled.span`
   vertical-align: middle;
@@ -205,6 +144,59 @@ const Suggest = styled.button`
 `;
 
 const Flights = ({ data }) => {
+  const save = function(isSuggested) {
+    const flightData = {
+      "meta": {
+        "trip_id": 1,
+        "user_id": 1,
+        "adults": 1,
+        "non_stop": "true",
+        "is_suggested": isSuggested ? "true" : "false",
+        "is_saved": "true"
+      },
+      "outgoing": {
+        "duration": data.outgoingDuration,
+        "arrival_airport": data.outgoingArrivalAirport,
+        "arrival_time": data.outgoingArrivalTime,
+        "departure_airport": data.outgoingDepartureAirport,
+        "departure_time": data.outgoingDepartureTime,
+        "departure_date": data.outgoingDepartureDate,
+        "flight_number": data.outgoingFlightNumber,
+        "number_of_stops": 1,
+        "carrier_code": data.outgoingCarrierCode,
+        "operating_carrier_code": data.outgoingOperatingCarrierCode,
+        "class": data.outgoingClass
+      },
+      "returning": {
+        "duration": data.returnDuration,
+        "arrival_airport": data.returnArrivalAirport,
+        "arrival_time": data.returnArrivalTime,
+        "departure_airport": data.returnDepartureAirport,
+        "departure_time": data.returnDepartureTime,
+        "departure_date": data.returnDepartureDate,
+        "flight_number": data.returnFlightNumber,
+        "number_of_stops": 1,
+        "carrier_code": data.returnCarrierCode,
+        "operating_carrier_code": data.returnOperatingCarrierCode,
+        "class": data.returnClass
+      }
+    }
+
+    console.log(flightData);
+
+    axios({
+      method: 'post',
+      url: 'http://morning-bayou-59969.herokuapp.com/flights',
+      data: flightData,
+      header: {'Access-Control-Allow-Origin': '*'}
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(console.log)
+  }
+
+
   return (
     <Container>
       <Departing>
@@ -239,50 +231,15 @@ const Flights = ({ data }) => {
       </Returning>
       <Price>
         <Amount>${data.totalPrice}</Amount>
-        <Save>
-          <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="sc-fzqzlV sc-fzqLLg kCMTKY"><path d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z"></path></svg>
+        <Save onClick={() => save(false)}>
+          <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="sc-fzqzlV sc-fzqLLg kCMTKY"><path d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z"></path></svg>
         </Save>
-        <Suggest>
-          <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" class="sc-fzqzlV gMJRj"><g vector-effect="non-scaling-stroke" transform="translate(0,0)scale(1,1)" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="2"><path d="m27 18v9c0 1.1045695-.8954305 2-2 2h-18c-1.1045695 0-2-.8954305-2-2v-9"></path><path d="m4.5 14.5h23z" transform="matrix(0 1 -1 0 30.5 -1.5)"></path><path d="m6 13 9.2928932-9.29289322c.3905243-.39052429 1.0236893-.39052429 1.4142136 0l9.2928932 9.29289322"></path></g></svg>
+        <Suggest onClick={() => save(true)}>
+          <svg aria-hidden="true" role="presentation" focusable="false" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" className="sc-fzqzlV gMJRj"><g vectorEffect="non-scaling-stroke" transform="translate(0,0)scale(1,1)" fill="none" fillRule="evenodd" stroke="#000" strokeWidth="2"><path d="m27 18v9c0 1.1045695-.8954305 2-2 2h-18c-1.1045695 0-2-.8954305-2-2v-9"></path><path d="m4.5 14.5h23z" transform="matrix(0 1 -1 0 30.5 -1.5)"></path><path d="m6 13 9.2928932-9.29289322c.3905243-.39052429 1.0236893-.39052429 1.4142136 0l9.2928932 9.29289322"></path></g></svg>
         </Suggest>
       </Price>
     </Container>
 
-
-    // <Container>
-    //   <DepartingUpper>
-    //     {/* <Direction>Departing</Direction> */}
-    //     <Date>{data.outgoingDepartureDate}</Date>
-    //     <Time>
-    //       {data.outgoingDepartureTime} - {data.outgoingArrivalTime}
-    //     </Time>
-    //     <Duration>{data.outgoingDuration}</Duration>
-    //     {/* <Class>{data.outgoingClass}</Class> */}
-    //   </DepartingUpper>
-    //   <DepartingLower>
-    //     <CarrierCode>{data.outgoingCarrierCode}</CarrierCode>
-    //     <FlightNumber>{data.outgoingFlightNumber}</FlightNumber>
-    //     <Airport>
-    //       {data.outgoingDepartureAirport} - {data.outgoingArrivalAirport}
-    //     </Airport>
-    //   </DepartingLower>
-    //   <ReturningUpper>
-    //     {/* <Direction>Returning</Direction> */}
-    //     <Date>{data.returnDepartureDate}</Date>
-    //     <Time>
-    //       {data.returnDepartureTime} - {data.returnArrivalTime}
-    //     </Time>
-    //     <Duration>{data.returnDuration}</Duration>
-    //     {/* <Class>{data.returnClass}</Class> */}
-    //   </ReturningUpper>
-    //   <ReturningLower>
-    //     <CarrierCode>{data.returnCarrierCode}</CarrierCode>
-    //     <FlightNumber>{data.returnFlightNumber}</FlightNumber>
-    //     <Airport>
-    //       {data.returnDepartureAirport} - {data.returnArrivalAirport}
-    //     </Airport>
-    //   </ReturningLower>
-    // </Container>
   );
 };
 
