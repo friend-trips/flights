@@ -50,12 +50,7 @@ class App extends React.Component {
 
    getSavedResults() {
     axios.get("http://morning-bayou-59969.herokuapp.com/flights/?trip_id=1")
-    // axios({
-    //   method: 'get',
-    //   url: 'http://morning-bayou-59969.herokuapp.com/flights',
-    //   data: {trip_id: 1},
-    //   // header: {'Access-Control-Allow-Origin': '*'}
-    // })
+   
       .then((data) => {
         let savedArray = [];
         console.log(data, "data.data")
@@ -66,26 +61,7 @@ class App extends React.Component {
         this.setState({savedResults: savedArray })
       })
       .catch(console.log)
-    // axoios.get("http://morning-bayou-59969.herokuapp.com/flights")
-    // .then((response) => {
-    //   this.setState({savedResults: response.data })
-    // })
-    // .catch((err) => {
-    //   console.log(err, "error getting response from data")
-    // })
-  }
-//   axios({
-//     method: 'get',
-//     url: 'http://morning-bayou-59969.herokuapp.com/flights',
-//     data: {"trip_id": 1},
-//     header: {'Access-Control-Allow-Origin': '*'}
-//   })
-//     .then((data) => {
-//       console.log(data);
-//     })
-//     .catch(console.log)
-// }
-
+   }
 
   componentDidMount() {
     this.getSavedResults();

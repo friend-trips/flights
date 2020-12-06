@@ -218,6 +218,7 @@ function FlightForm({ displaySearchFeed }) {
         outgoingNumberOfStops: result.itineraries[0].segments[0].numberOfStops,
         outgoingCarrierCode:
           flightDictionary[result.itineraries[0].segments[0].carrierCode],
+        outgoingAbbreviatedCarrierCode: result.itineraries[0].segments[0].carrierCode,
         outgoingOperatingCarrierCode:
           result.itineraries[0].segments[0].operating.carrierCode,
         outgoingClass: result.travelerPricings[0].fareDetailsBySegment[0].cabin,
@@ -248,6 +249,7 @@ function FlightForm({ displaySearchFeed }) {
         returnNumberOfStops: result.itineraries[1].segments[0].numberOfStops,
         returnCarrierCode:
           flightDictionary[result.itineraries[1].segments[0].carrierCode],
+        returnAbbreviatedCarrierCode: result.itineraries[1].segments[0].carrierCode,
         returnOperatingCarrierCode:
           result.itineraries[1].segments[0].operating.carrierCode,
         returnClass: result.travelerPricings[0].fareDetailsBySegment[1].cabin,
