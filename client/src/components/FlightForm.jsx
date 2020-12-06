@@ -260,8 +260,8 @@ function FlightForm({ displaySearchFeed }) {
 
     amadeus.shopping.flightOffersSearch
       .get({
-        originLocationCode: "SFO",
-        destinationLocationCode: "LON",
+        originLocationCode: to,
+        destinationLocationCode: from,
         departureDate: startingDate,
         returnDate: endingDate,
         adults: adults,
