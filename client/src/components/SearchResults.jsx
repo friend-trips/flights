@@ -3,11 +3,13 @@ import Flight from "./Flight.jsx";
 import styled from "styled-components";
 
 const ResultsContainer = styled.div`
-  // border: solid 10px;
-  // padding: 20px;
-  height: 100%;
+  padding: 5px;
+  height: 99%;
   overflow-y: scroll;
-  width: 69.5%;
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const SearchResults = (props) => {
