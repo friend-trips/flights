@@ -96,7 +96,6 @@ const Price = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
-  z-index: -1;
 `;
 const Amount = styled.span`
   vertical-align: middle;

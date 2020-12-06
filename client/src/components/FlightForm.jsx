@@ -118,6 +118,9 @@ const Form = styled.form`
   display: flex;
   flex-direction: row;
   justify-content: center;
+
+  position: relative;
+  z-index: 100;
 `;
 
 function FlightForm({ displaySearchFeed }) {
@@ -362,7 +365,7 @@ function FlightForm({ displaySearchFeed }) {
           style="border-width: 100px;"
         />
 
-        <StyledSubmit className="hi" type="submit" value="Search" />
+        <StyledSubmit className="hi" type="submit" value="Search"/>
       </Form>
     </Container>
   );
