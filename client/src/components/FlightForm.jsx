@@ -253,6 +253,8 @@ function FlightForm({ displaySearchFeed }) {
         returnOperatingCarrierCode:
           result.itineraries[1].segments[0].operating.carrierCode,
         returnClass: result.travelerPricings[0].fareDetailsBySegment[1].cabin,
+        outgoingAbbreviatedCarrierCode: result.itineraries[0].segments[0].carrierCode,
+        returnAbbreviatedCarrierCode: result.itineraries[1].segments[0].carrierCode
       };
       return filteredResult;
     });

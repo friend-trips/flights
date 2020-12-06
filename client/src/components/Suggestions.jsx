@@ -16,8 +16,8 @@ const Suggestions = (props) => {
   return (
   <SuggestionsContainer>
     <h2>Flight Suggestions</h2>
-    {props.searchResults.length > 0
-        ? props.searchResults.map((data, index) => (
+    {props.savedResults.length > 0
+        ? props.savedResults.map((data, index) => (
             <OneSuggestion key={index} data={data}></OneSuggestion>
           ))
         : null}

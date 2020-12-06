@@ -154,39 +154,39 @@ const Downvote = styled.button`
 
 
 const OneSuggestion = ({ data }) => {
-
+  let {outgoing, returning, meta} = data;
   return (
     <Container>
       <Departing>
         <DateAndCarrier>
-          <Date>{data.outgoingDepartureDate}</Date>
-          <CarrierCode>{data.outgoingAbbreviatedCarrierCode}</CarrierCode>
+          <Date>{outgoing.departure_date}</Date>
+          <CarrierCode>{outgoing.abbreviated_carrier_code}</CarrierCode>
         </DateAndCarrier>
         <Time>
-          {data.outgoingDepartureTime} - {data.outgoingArrivalTime}
+          {outgoing.departure_time} - {outgoing.arrival_time}
         </Time>
         <DurationAndAirports>
           <Airport>
-            {data.outgoingDepartureAirport} - {data.outgoingArrivalAirport}
+            {outgoing.departure_airport} - {outgoing.arrival_airport}
           </Airport>
         </DurationAndAirports>
       </Departing>
       <Returning>
         <DateAndCarrier>
-          <Date>{data.returnDepartureDate}</Date>
-          <CarrierCode>{data.returnAbbreviatedCarrierCode}</CarrierCode>
+          <Date>{returning.departure_date}</Date>
+          <CarrierCode>{returning.abbreviated_carrier_code}</CarrierCode>
         </DateAndCarrier>
         <Time>
-          {data.returnDepartureTime} - {data.returnArrivalTime}
+          {returning.departure_time} - {returning.arrival_time}
         </Time>
         <DurationAndAirports>
           <Airport>
-            {data.returnDepartureAirport} - {data.returnArrivalAirport}
+            {returning.departure_airport} - {returning.arrival_airport}
           </Airport>
         </DurationAndAirports>
       </Returning>
       <Price>
-        <Amount>${data.totalPrice}</Amount>
+        <Amount>${meta.total_price}</Amount>
         <Upvote>
           <UpArrow viewBox="0 0 18 18" role="presentation" ariaHidden="true" focusable="false"><path d="m13.7 16.29a1 1 0 1 1 -1.42 1.41l-8-8a1 1 0 0 1 0-1.41l8-8a1 1 0 1 1 1.42 1.41l-7.29 7.29z" fillRule="evenodd"></path></UpArrow>
         </Upvote>

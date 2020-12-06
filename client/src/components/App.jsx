@@ -3,6 +3,7 @@ import FlightForm from "./FlightForm.jsx";
 import SearchResults from "./SearchResults.jsx";
 import Suggestions from "./Suggestions.jsx";
 import styled from "styled-components";
+import axios from 'axios';
 
 //entire screen
 const Container = styled.div`
@@ -33,15 +34,37 @@ class App extends React.Component {
 
     this.state = {
       searchResults: [],
+      savedResults: [],
     };
 
     this.displaySearchFeed = this.displaySearchFeed.bind(this);
+    this.getSavedResults = this.getSavedResults.bind(this);
   }
 
   displaySearchFeed(data) {
     this.setState({
       searchResults: data,
     });
+  }
+
+
+   getSavedResults() {
+    axios.get("http://morning-bayou-59969.herokuapp.com/flights/?trip_id=1")
+   
+      .then((data) => {
+        let savedArray = [];
+        console.log(data, "data.data")
+        for (let keys in data.data) {
+          savedArray.push(data.data[keys])
+        }
+        console.log("savedArray", savedArray);
+        this.setState({savedResults: savedArray })
+      })
+      .catch(console.log)
+   }
+
+  componentDidMount() {
+    this.getSavedResults();
   }
 
   render() {
@@ -52,9 +75,7 @@ class App extends React.Component {
           {this.state.searchResults.length > 0 ? (
             <SearchResults searchResults={this.state.searchResults} />
           ) : <PreSearchResults />}
-          {this.state.searchResults.length > 0 ? (
-            <Suggestions searchResults={this.state.searchResults} />
-          ) : <PreSearchResults />}
+          <Suggestions savedResults={this.state.savedResults} />
         </Content>
       </Container>
     );
