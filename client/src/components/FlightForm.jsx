@@ -1,25 +1,15 @@
 import React, { Component, useState } from "react";
 import { DateRangeInput } from "@datepicker-react/styled";
 import styled, { ThemeProvider } from "styled-components";
-<<<<<<< HEAD
-import moment from 'moment';
-import keys from '../../../config.js';
-=======
-import "./FlightForm.css";
 import moment from "moment";
->>>>>>> search-bar-style
+import keys from "../../../config.js";
 
 // import styles from './App.css';
 
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
-<<<<<<< HEAD
   clientId: keys.clientId,
-  clientSecret: keys.clientSecret
-=======
-  clientId: "GvdXBCW4a83r4vyr5i5ngrgxUX9XmTYG",
-  clientSecret: "AtQCe6Bqh1OQOK5O",
->>>>>>> search-bar-style
+  clientSecret: keys.clientSecret,
 });
 
 const Container = styled.div`
@@ -145,8 +135,8 @@ function FlightForm({ displaySearchFeed }) {
 
   const setDates = (data) => {
     setStartDate(data.startDate);
-    setEndDate(data.endDate)
-  }
+    setEndDate(data.endDate);
+  };
   const handleChange = (field, event) => {
     console.log("handlechange", field);
     switch (field) {
@@ -175,11 +165,11 @@ function FlightForm({ displaySearchFeed }) {
     function changeTime(timeString) {
       if (timeString.slice(0, 2) > 12) {
         let twelveHour = timeString.slice(0, 2) % 12;
-        return twelveHour.toString().concat(timeString.slice(2)).concat(' pm');
-      } else if (timeString[0] === '0') {
-        return timeString.slice(1).concat(' am');
+        return twelveHour.toString().concat(timeString.slice(2)).concat(" pm");
+      } else if (timeString[0] === "0") {
+        return timeString.slice(1).concat(" am");
       } else {
-        return timeString.concat(' am');
+        return timeString.concat(" am");
       }
     }
 
@@ -265,31 +255,31 @@ function FlightForm({ displaySearchFeed }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let startingDate = moment(startDate).format("YYYY-MM-DD")
-    let endingDate = moment(endDate).format("YYYY-MM-DD")
+    let startingDate = moment(startDate).format("YYYY-MM-DD");
+    let endingDate = moment(endDate).format("YYYY-MM-DD");
 
-    amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: 'SFO',
-      destinationLocationCode: 'LON',
-      departureDate: '2021-02-01',
-      returnDate: '2021-02-07',
-      adults: adults,
-      travelClass: seatClass,
-      nonStop: nonstop,
-      // nonStop: false,
-      currencyCode: 'USD',
-      max: 25
-    })
-    .then(function (response) {
-      console.log("response", response.data);
-      flightDictionary = response.result.dictionaries.carriers;
-      displaySearchFeed(filterData(response.data));
-    })
-    .catch(function (response) {
-      console.error(response);
-    });
-  }
-
+    amadeus.shopping.flightOffersSearch
+      .get({
+        originLocationCode: "SFO",
+        destinationLocationCode: "LON",
+        departureDate: "2021-02-01",
+        returnDate: "2021-02-07",
+        adults: adults,
+        travelClass: seatClass,
+        nonStop: nonstop,
+        // nonStop: false,
+        currencyCode: "USD",
+        max: 25,
+      })
+      .then(function (response) {
+        console.log("response", response.data);
+        flightDictionary = response.result.dictionaries.carriers;
+        displaySearchFeed(filterData(response.data));
+      })
+      .catch(function (response) {
+        console.error(response);
+      });
+  };
 
   return (
     <Container>
