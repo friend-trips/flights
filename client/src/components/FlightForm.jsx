@@ -262,8 +262,8 @@ function FlightForm({ displaySearchFeed }) {
       .get({
         originLocationCode: "SFO",
         destinationLocationCode: "LON",
-        departureDate: "2021-02-01",
-        returnDate: "2021-02-07",
+        departureDate: startingDate,
+        returnDate: endingDate,
         adults: adults,
         travelClass: seatClass,
         nonStop: nonstop,
