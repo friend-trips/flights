@@ -52,7 +52,9 @@ class App extends React.Component {
           {this.state.searchResults.length > 0 ? (
             <SearchResults searchResults={this.state.searchResults} />
           ) : <PreSearchResults />}
-          <Suggestions />
+          {this.state.searchResults.length > 0 ? (
+            <Suggestions searchResults={this.state.searchResults} />
+          ) : <PreSearchResults />}
         </Content>
       </Container>
     );
