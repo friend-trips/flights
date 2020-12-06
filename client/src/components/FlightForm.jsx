@@ -2,13 +2,14 @@ import React, { Component, useState} from "react";
 import { DateRangeInput } from "@datepicker-react/styled";
 import styled, { ThemeProvider } from "styled-components";
 import moment from 'moment';
+import keys from '../../../config.js';
 
 // import styles from './App.css';
 
 var Amadeus = require("amadeus");
 var amadeus = new Amadeus({
-  clientId: 'GvdXBCW4a83r4vyr5i5ngrgxUX9XmTYG',
-  clientSecret: 'AtQCe6Bqh1OQOK5O'
+  clientId: keys.clientId,
+  clientSecret: keys.clientSecret
 });
 
 const Container = styled.div`
@@ -38,8 +39,8 @@ function FlightForm({displaySearchFeed}) {
   // const [test, setTest] = useState(false);
 
   const setDates = (data) => {
-    setStartDate(moment(data.startDate).format("YYYY-MM-DD"));
-    setEndDate(moment(data.endDate).format("YYYY-MM-DD"))
+    setStartDate(data.startDate);
+    setEndDate(data.endDate)
   }
   const handleChange = (field, event) => {
     console.log('handlechange', field);
@@ -69,9 +70,11 @@ function FlightForm({displaySearchFeed}) {
     function changeTime(timeString) {
       if (timeString.slice(0, 2) > 12) {
         let twelveHour = timeString.slice(0, 2) % 12;
-        return twelveHour.toString().concat(timeString.slice(2)).concat(' PM');
+        return twelveHour.toString().concat(timeString.slice(2)).concat(' pm');
+      } else if (timeString[0] === '0') {
+        return timeString.slice(1).concat(' am');
       } else {
-        return timeString.slice(1).concat(' AM');
+        return timeString.concat(' am');
       }
     }
 
@@ -82,14 +85,14 @@ function FlightForm({displaySearchFeed}) {
         if (MDYArr[0] === "0") MDYArr.shift();
         return MDYArr.join("")
       });
-      return dateArr.join("-");
+      return dateArr.join("/");
     }
 
     return array.map(result => {
       let filteredResult = {
         id: result.id,
         bookableSeats: result.numberOfBookableSeats,
-        totalPrice: result.price.grandTotal,
+        totalPrice: Math.floor(result.price.grandTotal),
 
         outgoingDuration: `${result.itineraries[0].segments[0].duration.slice(2, 5).toLowerCase()} ${result.itineraries[0].segments[0].duration.slice(5).toLowerCase()}`,
         outgoingArrivalAirport: result.itineraries[0].segments[0].arrival.iataCode,
@@ -123,10 +126,12 @@ function FlightForm({displaySearchFeed}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    let startingDate = moment(startDate).format("YYYY-MM-DD")
+    let endingDate = moment(endDate).format("YYYY-MM-DD")
 
     amadeus.shopping.flightOffersSearch.get({
-      originLocationCode: from,
-      destinationLocationCode: to,
+      originLocationCode: 'SFO',
+      destinationLocationCode: 'LON',
       departureDate: '2021-02-01',
       returnDate: '2021-02-07',
       adults: adults,
@@ -137,9 +142,8 @@ function FlightForm({displaySearchFeed}) {
       max: 25
     })
     .then(function (response) {
-      console.log(response);
+      console.log("response", response.data);
       flightDictionary = response.result.dictionaries.carriers;
-      console.log('flightDictionary', flightDictionary);
       displaySearchFeed(filterData(response.data));
     })
     .catch(function (response) {

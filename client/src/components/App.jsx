@@ -8,6 +8,7 @@ import styled from "styled-components";
 const Container = styled.div`
   position: absolute;
   height: 99%;
+  width: 99%;
   padding: .5%;
 `
 const Content = styled.div`
@@ -17,6 +18,13 @@ const Content = styled.div`
 `;
 //^^ height will control size of the bottom section
 // form height and content should add up to equal 1--%
+
+const PreSearchResults = styled.div`
+  border: solid 1px;
+  height: 100%;
+  width: 66%;
+  float: left;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -42,7 +50,7 @@ class App extends React.Component {
         <Content>
           {this.state.searchResults.length > 0 ? (
             <SearchResults searchResults={this.state.searchResults} />
-          ) : null}
+          ) : <PreSearchResults />}
           <Suggestions />
         </Content>
       </Container>
