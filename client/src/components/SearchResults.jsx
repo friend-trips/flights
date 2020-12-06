@@ -7,6 +7,7 @@ const ResultsContainer = styled.div`
   // padding: 20px;
   height: 100%;
   overflow-y: scroll;
+  width: 69.5%;
 `;
 
 const SearchResults = (props) => {

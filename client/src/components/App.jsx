@@ -14,6 +14,7 @@ const Content = styled.div`
   border: solid 3px;
   display: flex;
   height: 89%;
+  justify-content: space-between;
 `;
 //^^ height will control size of the bottom section
 // form height and content should add up to equal 1--%
