@@ -12,10 +12,14 @@ const SuggestionsContainer = styled.div`
   align-items: center;
 `;
 
+const SuggestionsHeader = styled.h2`
+  font-family: "cerapro-bold",sans-serif;
+`;
+
 const Suggestions = (props) => {
   return (
   <SuggestionsContainer>
-    <h2>Flight Suggestions</h2>
+    <SuggestionsHeader>Flight Suggestions</SuggestionsHeader>
     {props.savedResults.length > 0
         ? props.savedResults.map((data, index) => (
             <OneSuggestion key={index} data={data}></OneSuggestion>

@@ -13,9 +13,21 @@ const Container = styled.div`
   height: 150px;
   width: 97%;
   padding: 10px;
+  font-family: "cerapro-bold",sans-serif;
+  position: relative
 `;
 const Direction = styled.h1``;
 const FlightNumber = styled.span``;
+
+const User = styled.span`
+  font-family: "cerapro-bold",sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 24px;
+  right: 4%;
+  top: 2%;
+  position: absolute;
+`;
 const Date = styled.span`
   font-family: "cerapro-bold",sans-serif;
   font-weight: 700;
@@ -157,6 +169,9 @@ const OneSuggestion = ({ data }) => {
   let {outgoing, returning, meta} = data;
   return (
     <Container>
+      <User>
+        {meta.username}
+      </User>
       <Departing>
         <DateAndCarrier>
           <Date>{outgoing.departure_date}</Date>

@@ -50,7 +50,7 @@ class App extends React.Component {
 
    getSavedResults() {
     axios.get("http://morning-bayou-59969.herokuapp.com/flights/?trip_id=1")
-   
+
       .then((data) => {
         let savedArray = [];
         console.log(data, "data.data")
