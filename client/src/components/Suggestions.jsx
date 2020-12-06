@@ -14,9 +14,9 @@ const SuggestionsContainer = styled.div`
 
 const Suggestions = (props) => {
   return (
-  <SuggestionsContainer>
-    <h2>Flight Suggestions</h2>
-  </SuggestionsContainer>
+    <SuggestionsContainer>
+      <h2>Flight Suggestions</h2>
+    </SuggestionsContainer>
   )
 };
 
